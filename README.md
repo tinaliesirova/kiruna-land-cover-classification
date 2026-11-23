@@ -12,6 +12,9 @@ Aerial imagery provided for educational purposes through the Swedish GET Tool (h
 
 Derived classification maps and analytical outputs presented in this repository were created by the author.
 
+## Tools
+ArcGIS Pro
+
 
 # Methods
 
@@ -107,7 +110,7 @@ Additional post-processing was performed through reclassification and class merg
 Final land cover maps were produced to visualise and communicate the spatial distribution of land cover classes within the Kiruna study area.
 
 
-## Results
+# Results
 The final classification successfully differentiated major land cover classes within the study area. 
 
 ##Key observations:
@@ -117,10 +120,8 @@ The final classification successfully differentiated major land cover classes wi
 - Water bodies were problematic to successfully separate from vegetation in shadow.
 - Class merging improved the interpretability of the final map.
 
-## Tools
-- ArcGIS Pro
 
-## Skills Demonstrated
+# Skills Demonstrated
 - Training data preparation
 - Pixel-based classification
 - Object-based classification
