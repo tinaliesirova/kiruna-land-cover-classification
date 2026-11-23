@@ -1,14 +1,17 @@
 # Kiruna Land Cover Classification
 ## Overview
-This project explores land cover classification of high-resolution imagery from Kiruna, Sweden, using image segmentation and classification workflows in ArcGIS Pro.
 
-The objective was to produce a meaningful land cover map and evaluate the effectiveness of different classification approaches.
+This project evaluates pixel-based and object-based land cover classification workflows using high-resolution aerial imagery from Kiruna, Sweden.
+
+Two supervised Support Vector Machine (SVM) classification models were developed. The first model was trained using manually digitised training samples on the original imagery, while the second model was trained on segmented image objects following image segmentation. Classification outputs were compared and further refined through reclassification and class aggregation to improve thematic consistency and cartographic readability.
+
+The project highlights the advantages and limitations of pixel/ object-based image analysis for land cover mapping in complex environments.
 
 ## Study Area
 Kiruna, Sweden.
 
 ## Data Sources
-Aerial imagery provided for educational purposes through the Swedish GET Tool (https://maps.slu.se/get/)  and university coursework.
+Aerial imagery provided for educational purposes through the Swedish GET Tool (https://maps.slu.se/get/) and Umea University (Sweden).
 
 Derived classification maps and analytical outputs presented in this repository were created by the author.
 
@@ -54,13 +57,21 @@ Key observations included:
 
 ## Image Segmentation
 
-To improve classification performance, the imagery was segmented into spatially homogeneous image objects prior to a second classification run.
+The imagery was segmented to create spatially homogeneous image objects for object-based classification.
 
-Segmentation grouped neighbouring pixels with similar spectral characteristics into larger objects representing meaningful landscape features.
+An initial segmentation was performed; however, visual inspection showed that many segments were too large and merged distinct landscape features into single objects. This level of generalisation reduced the suitability of the segments for subsequent classification.
+
+The segmentation parameters were therefore adjusted and the imagery was segmented a second time using:
+
+- Spectral Detail: 20
+- Spatial Detail: 15
+- Minimum Segment Size: 5 pixels
+
+The revised segmentation produced smaller and more meaningful image objects that better represented roads, vegetation patches, buildings, and water bodies, providing a more suitable basis for object-based classification.
 
 ## Object-Based Classification
 
-Following image segmentation, a new set of training samples was created directly on the segmented image objects.
+Following image segmentation, a new set of training samples was created directly on the second segmented image.
 
 The revised classification scheme consisted of eight classes:
 
@@ -80,15 +91,16 @@ The forest class used in the pixel-based classification was removed because of c
 
 ## Classification Refinement
 
-The object-based classification output was compared with the original pixel-based result and visually assessed against the source imagery.
+The object-based classification output was visually assessed against the source imagery.
 
-Several classes showing substantial overlap were merged to improve thematic consistency and overall map readability.
+Several classification issues remained after segmentation and supervised classification, including:
 
-Refinements included:
+- Forest areas being partially classified as lake
+- Small forest roads being classified as bedrock or sediment
 
-- Reduction of class fragmentation
-- Simplification of overlapping vegetation classes
-- Improvement of spatial coherence across the classified landscape
+To simplify the classification scheme and reduce class overlap, the classes Bedrock and Forest Shrub were merged using a reclassification workflow.
+
+This reduced thematic complexity and improved the interpretability of the final map, although some confusion between forest and lake classes remained.
 
 ## Quality Assessment
 
@@ -122,7 +134,7 @@ The final classification successfully differentiated major land cover classes wi
 
 
 # Skills Demonstrated
-- Training data preparation
+- Training sample generation
 - Pixel-based classification
 - Object-based classification
 - Support Vector Machine (SVM) modelling
