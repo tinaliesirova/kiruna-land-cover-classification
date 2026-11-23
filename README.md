@@ -25,11 +25,11 @@ ArcGIS Pro
 
 The aerial imagery was visually inspected to identify dominant land cover types, class boundaries, and areas likely to cause classification confusion. Initial land cover classes were defined based on observable landscape characteristics within the study area.
 
-## Training Data Collection
+## Pixel-Based Classification
 
-Representative training samples were manually digitised for each land cover class.
+### Training Data Collection and Model Training
 
-Classes included:
+Representative training samples were manually digitised for nine land cover classes:
 
 - Trees (city)
 - Lake
@@ -41,19 +41,29 @@ Classes included:
 - Forest Shrub
 - Forest
 
-A total of 208 training samples were created and used to train an SVM classifier.
+A total of 208 training samples were created and evaluated using the training sample inspection tools in ArcGIS Pro.
 
-## Pixel-Based Classification
+The inspection process was used to:
 
-An initial supervised classification was performed directly on the imagery using the training samples.
+- Assess class separability
+- Identify overlapping classes
+- Detect potentially mislabelled training samples
+- Evaluate the suitability of the training dataset prior to model training
 
-The resulting map was evaluated against the source imagery to identify classification errors and areas of class confusion.
+Following quality assessment, the training samples were used to train a supervised Support Vector Machine (SVM) classifier directly on the original imagery.
+
+### Classification Results
+
+The resulting land cover map was visually assessed against the source imagery to identify classification errors and areas of class confusion.
 
 Key observations included:
 
 - High local variability within vegetation classes
 - Pixel-level noise ("salt-and-pepper" effect)
-- Misclassification along class boundaries, especially water bodies with areas in shadow
+- Misclassification along class boundaries
+- Water bodies partially classified as forested areas, particularly in shaded sections of the imagery
+
+These limitations motivated the development of an object-based classification workflow using image segmentation.
 
 ## Image Segmentation
 
@@ -98,7 +108,7 @@ Several classification issues remained after segmentation and supervised classif
 - Forest areas being partially classified as lake
 - Small forest roads being classified as bedrock or sediment
 
-To simplify the classification scheme and reduce class overlap, the classes Bedrock and Forest Shrub were merged using a reclassification workflow.
+To simplify the classification scheme and reduce class overlap, the classes Bedrock and Forest Shrub were merged using the Reclassify-tool.
 
 This reduced thematic complexity and improved the interpretability of the final map, although some confusion between forest and lake classes remained.
 
@@ -125,7 +135,7 @@ Final land cover maps were produced to visualise and communicate the spatial dis
 # Results
 The final classification successfully differentiated major land cover classes within the study area. 
 
-##Key observations:
+## Key observations:
 
 - Forest and shrubland dominated the landscape.
 - Urban features such as roads and buildings were clearly identified.
