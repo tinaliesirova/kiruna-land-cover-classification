@@ -1,4 +1,4 @@
-# Automated Land Cover Classification in Kiruna
+# Automated Land Cover Classification (Kiruna, Sweden)
 ## Overview
 
 This project evaluates pixel-based and object-based land cover classification workflows using high-resolution aerial imagery from Kiruna, Sweden.
